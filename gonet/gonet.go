@@ -14,11 +14,11 @@ import (
 //++++++++++++++++++++++++++++++++++++++++++++
 
 // make get request
-func GET(url string, defaultTimeout int, headers ...map[string]string) (string, error) {
+func GET(url string, defaultTimeoutInSeconds int, headers ...map[string]string) (string, error) {
 	//defaultTimeout := 30 // time out request if no response
 	// Create an HTTP client with a timeout
 	client := http.Client{
-		Timeout: time.Second * time.Duration(defaultTimeout), // Timeout after 5 seconds
+		Timeout: time.Second * time.Duration(defaultTimeoutInSeconds), // Timeout after 5 seconds
 	}
 
 	req, err := http.NewRequest("GET", url, nil)
@@ -352,7 +352,7 @@ func MakeMultiplePostFormUnique(numberOfConcurrentRequests uint, url string, tim
 }
 
 // !++++++++++++++++++++++++++++++++++++++++++++
-// | make unique multiple get request 
+// | make unique multiple get request
 // ++++++++++++++++++++++++++++++++++++++++++++
 func MakeMultipleGetUnique(numberOfConcurrentRequests uint, url string, timeouts int, dataToSend []string, headers map[string]string) (map[int]map[int]map[int]string, error) {
 	myChannel := make(chan map[int]map[int]string)
